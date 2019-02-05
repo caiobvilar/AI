@@ -17,6 +17,13 @@ struct Visible		//Visible units
 	uint8_t state;									//visible unit states
 };
 
+double DRand(double min,double max)
+{
+	double ret = (double)rand()/RAND_MAX;
+	return min+(ret*(max-min));
+}
+
+void start_weights(std::vector<Hidden> h, std::vector<Visible> v);
 
 const int node_count = 3;
 
@@ -32,4 +39,19 @@ int main(int argc, char *argv[])
 
 	
 	return 0;
+}
+
+
+void start_weights(std::vector<Hidden> h, std::vector<Visible> v)
+{
+	std::vector<double>::iterator weight_itr;
+	for(hidden_units_itr = h.begin();hidden_units_itr != h.end();hidden_units_itr++)
+	{
+		for(weight_itr = (*hidden_units_itr).begin();
+				weight_itr != (*hidden_units_itr).end();
+				weight_itr++)
+		{
+
+		}
+	}
 }

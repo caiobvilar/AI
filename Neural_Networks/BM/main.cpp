@@ -24,7 +24,11 @@ const AND_States[4][4];
 
 int main(int argc, char *argv[])
 {
+	std::vector<Hidden> hidden_units;
+	std::vector<Visible> visible_units;
 	
+	std::vector<Hidden>::iterator hidden_units_itr;
+	std::vector<Visible>::iterator visible_units_itr;
 
 	
 	return 0;

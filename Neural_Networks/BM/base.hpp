@@ -23,25 +23,6 @@ struct Unit			// Units definition structure
 void initialization(std::vector<Unit> u,double *W,double *L, double J*);
 void Clamped_phase(std::vector<Unit> u,std::vector<Training_Pattern> p,double *W,double *L, double J*);
 void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double J*);
+double DRand(double min,double max);
 
-
-double DRand(double min,double max)
-{
-	double ret = (double)rand()/RAND_MAX;
-	return min+(ret*(max-min));
-}
-
-void initialization(std::vector<Unit> u,double *W,double *L, double J*)
-{
-
-}
-
-void Clamped_phase(std::vector<Unit> u,std::vector<Training_Pattern> p,double *W,double *L, double J*)
-{
-
-}
-void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double J*);
-{
-
-}
 #endif //_BASE_HPP_

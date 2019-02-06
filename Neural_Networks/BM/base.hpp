@@ -20,6 +20,10 @@ struct Unit			// Units definition structure
 	uint8_t state;	// Units state
 };
 
+void initialization(std::vector<Unit> u,double *W,double *L, double J*);
+void Clamped_phase(std::vector<Unit> u,std::vector<Training_Pattern> p,double *W,double *L, double J*);
+void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double J*);
+
 
 double DRand(double min,double max)
 {
@@ -27,5 +31,17 @@ double DRand(double min,double max)
 	return min+(ret*(max-min));
 }
 
+void initialization(std::vector<Unit> u,double *W,double *L, double J*)
+{
 
+}
+
+void Clamped_phase(std::vector<Unit> u,std::vector<Training_Pattern> p,double *W,double *L, double J*)
+{
+
+}
+void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double J*);
+{
+
+}
 #endif //_BASE_HPP_

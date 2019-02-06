@@ -10,6 +10,9 @@
 
 #include "base.hpp"
 
+double W[VISIBLE_COUNT][HIDDEN_COUNT]; //
+double L[HIDDEN_COUNT][HIDDEN_COUNT]; 	// Diagonal weights set to zero
+double J[VISIBLE_COUNT][VISIBLE_COUNT];// Diagonal weights set to zero
 int main(int argc, char *argv[])
 {
 	std::vector<Unit> units;

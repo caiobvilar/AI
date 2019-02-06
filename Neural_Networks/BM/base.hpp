@@ -11,13 +11,10 @@
 
 ///////////////////////BASE DEFINITIONS///////
 
-#define UNIT_COUNT	3	
-#define VISIBLE_COUNT 1
+#define UNIT_COUNT	4	
+#define VISIBLE_COUNT 2
 #define HIDDEN_COUNT 2
 
-static double W[VISIBLE_COUNT][HIDDEN_COUNT]; //
-static double L[HIDDEN_COUNT][HIDDEN_COUNT]; 	// Diagonal weights set to zero
-static double J[VISIBLE_COUNT][VISIBLE_COUNT];// Diagonal weights set to zero
 
 
 struct Unit			// Units definition structure
@@ -28,11 +25,11 @@ struct Unit			// Units definition structure
 
 
 std::vector<Unit> set_visible_hidden(std::vector<Unit> u);
-std::vector<Unit> initialization(std::vector<Unit> u,double *W,double *L,double *J);
-void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *W,double *L, double *J);
-void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double *J);
+std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j);
+void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *w,double *l, double *j);
+void Freerunning_phase(std::vector<Unit> u,double *w,double *l, double *j);
 double DRand(double min,double max);
 void show_states(std::vector<Unit> u);
-void show_weights(double *W, double *L, double *J);
+void show_weights(double *w, double *l, double *j);
 
 #endif //_BASE_HPP_

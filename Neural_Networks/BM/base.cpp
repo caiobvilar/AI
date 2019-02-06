@@ -24,11 +24,10 @@ std::vector<Unit> set_visible_hidden(std::vector<Unit> u)
 	return u;
 }
 
-std::vector<Unit> initialization(std::vector<Unit> u,double *W,double *L,double *J)
+std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j)
 {
 	std::cout << "[SYSTEM]: initialization of states and weights." << std::endl;
 
-	srand(time(0));
 	std::vector<Unit>::iterator itr_u;
 	std::cout << "[SYSTEM]: setting state of [" << u.size() << "] units randomly..." << std::endl;
 	for(itr_u = u.begin();itr_u != u.end();itr_u++)
@@ -38,29 +37,29 @@ std::vector<Unit> initialization(std::vector<Unit> u,double *W,double *L,double 
 	std::cout << "[SYSTEM]: setting [" << VISIBLE_COUNT*VISIBLE_COUNT << "] visible-visible weights randomly..." << std::endl;
 	for(static int i = 0;i < VISIBLE_COUNT*VISIBLE_COUNT;i++) //initializing visible-visible interaction weights
 	{
-		*W++ = DRand(-1,1);
+		*(w+i) = DRand(-1,1);
 	}
 	std::cout << "[SYSTEM]: setting [" << VISIBLE_COUNT*HIDDEN_COUNT << "] visible-hidden weights randomly..." << std::endl;
 	for(static int i = 0;i < VISIBLE_COUNT*HIDDEN_COUNT;i++) //initializing visible-hidden interaction weights
 	{
 		//put condition to set diagonal weights to zero
-		*L++ = DRand(-1,1);
+		*(l+i) = DRand(-1,1);
 	}
 	std::cout << "[SYSTEM]: setting [" << HIDDEN_COUNT*HIDDEN_COUNT << "] hidden-hidden weights randomly..." << std::endl;
 	for(static int i = 0;i < HIDDEN_COUNT*HIDDEN_COUNT;i++) //initializing hidden-hidden interaction weights
 	{
 		//put condition to set diagonal weights to zero
-		*J++ = DRand(-1,1);
+		*(j+i) = DRand(-1,1);
 	}
 	return u;
 }
 
-void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *W,double *L, double *J)
+void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *w,double *l, double *j)
 {
 	std::cout << "[SYSTEM]: starting clamped phase...." << std::endl;
 
 }
-void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double *J)
+void Freerunning_phase(std::vector<Unit> u,double *w,double *l, double *j)
 {
 	std::cout << "[SYSTEM]: starting Free-Running phase...." << std::endl;
 
@@ -83,73 +82,32 @@ void show_states(std::vector<Unit> u)
 	}
 }
 
-void show_weights(double *W, double *L, double *J)
+void show_weights(double *w, double *l, double *k)
 {
-	std::cout << "[SYSTEM]: showing weights...." << std::endl;
-	for(static int i=0;i<HIDDEN_COUNT;i++)
+	for(static int i=0;i<VISIBLE_COUNT*HIDDEN_COUNT;i++)
 	{
-		for(static int j=0;j < VISIBLE_COUNT;j++)
+		if((i%HIDDEN_COUNT) == 0)
 		{
-			std::cout << 
+			std::cout << std::endl;
 		}
+		std::cout << *(w+i) << " ";
 	}
+	for(static int i=0;i<VISIBLE_COUNT*VISIBLE_COUNT;i++)
+	{
+		if((i%VISIBLE_COUNT) == 0)
+		{
+			std::cout << std::endl;
+		}
+		std::cout << *(l+i) << " ";
+	}
+	for(static int i=0;i<HIDDEN_COUNT*HIDDEN_COUNT;i++)
+	{
+		if((i%HIDDEN_COUNT) == 0)
+		{
+			std::cout << std::endl;
+		}
+		std::cout << *(k+i) << " ";
+	}
+	std::cout << "\n\n";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

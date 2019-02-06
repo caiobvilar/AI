@@ -13,8 +13,9 @@
 int main(int argc, char *argv[])
 {
 	std::vector<Unit> units;
-	set_visible(units);
-  initialization(units,W[0],L[0],J[0]);
+	units = set_visible_hidden(units);
+  units = initialization(units,W[0],L[0],J[0]);
+	std::cout << "There are: " << units.size() << " units." << std::endl; 
 	show_states(units);
 	show_weights(W[0],L[0],J[0]);
 	return 0;

@@ -1,21 +1,31 @@
 #ifndef _BASE_HPP_
 #define _BASE_HPP_
+///////////////////////INCLUDES///////////////
 
-#include <list>
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#define UNIT_COUNT	3	
 
-struct Unit
+///////////////////////BASE DEFINITIONS///////
+
+static double W[UNIT_COUNT][UNIT_COUNT];
+static double J[UNIT_COUNT][UNIT_COUNT];
+static double L[UNIT_COUNT][UNIT_COUNT];
+
+struct Unit			// Units definition structure
 {
-	bool visible;
-	double bias;
-	double std::list<float> weights;
-	bool state;
+	bool visible;   // Defines if they're visible units or not.
+	uint8_t state;	// Units state
 };
 
-struct Net
+
+double DRand(double min,double max)
 {
-	std::vector<Unit> visible;
-	std::vector<Unit> hidden;
-	
-};
+	double ret = (double)rand()/RAND_MAX;
+	return min+(ret*(max-min));
+}
+
 
 #endif //_BASE_HPP_

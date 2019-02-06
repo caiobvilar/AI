@@ -6,13 +6,19 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-#define UNIT_COUNT	3	
+#include <ctime>
+
 
 ///////////////////////BASE DEFINITIONS///////
 
-static double W[UNIT_COUNT][UNIT_COUNT];
-static double J[UNIT_COUNT][UNIT_COUNT];
-static double L[UNIT_COUNT][UNIT_COUNT];
+#define UNIT_COUNT	3	
+#define VISIBLE_COUNT 1
+#define HIDDEN_COUNT 2
+
+static double W[VISIBLE_COUNT][HIDDEN_COUNT];
+static double L[HIDDEN_COUNT][HIDDEN_COUNT];
+static double J[VISIBLE_COUNT][VISIBLE_COUNT];
+
 
 struct Unit			// Units definition structure
 {
@@ -20,9 +26,13 @@ struct Unit			// Units definition structure
 	uint8_t state;	// Units state
 };
 
-void initialization(std::vector<Unit> u,double *W,double *L, double J*);
-void Clamped_phase(std::vector<Unit> u,std::vector<Training_Pattern> p,double *W,double *L, double J*);
-void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double J*);
+
+void set_visible(std::vector<Unit> u);
+void initialization(std::vector<Unit> u,double *W,double *L,double *J);
+void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *W,double *L, double *J);
+void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double *J);
 double DRand(double min,double max);
+void show_states(std::vector<Unit> u);
+void show_weights(double *W, double *L, double *J);
 
 #endif //_BASE_HPP_

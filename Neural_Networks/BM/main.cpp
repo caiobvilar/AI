@@ -8,25 +8,15 @@
 ////////////////////////////////////////////////////////////////////////////
 
 
-//#include "base.hpp"
-#include <iostream>
+#include "base.hpp"
 
 int main(int argc, char *argv[])
 {
-	/*
-	std::vector<Unit> Units;
-	std::vector<Unit>::iterator ITR_Units;
-	*/
-	int a[100];
-	for(int i=0;i<100;i++)
-	{
-		a[i] = rand() %2;
-	}
-	
-	for(int i=0;i<100;i++)
-	{
-		std::cout << "A[" << i << "]: " << a[i] << std::endl;
-	}
+	std::vector<Unit> units;
+	set_visible(units);
+  initialization(units,W[0],L[0],J[0]);
+	show_states(units);
+	show_weights(W[0],L[0],J[0]);
 	return 0;
 }
 

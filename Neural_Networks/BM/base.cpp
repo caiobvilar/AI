@@ -8,6 +8,7 @@ double DRand(double min,double max)
 
 void set_visible(std::vector<Unit> u)
 {
+	std::cout << "[SYSTEM]: setting [" << VISIBLE_COUNT << "] units as visible..." << std::endl;
 	for(static int i=0;i<VISIBLE_COUNT;i++)
 	{
 		Unit visible;
@@ -18,7 +19,9 @@ void set_visible(std::vector<Unit> u)
 
 void initialization(std::vector<Unit> u,double *W,double *L,double *J)
 {
+	std::cout << "[SYSTEM]: initialization of states and weights." << std::endl;
 	srand(time(0));
+
 	for(static int i=0;i<UNIT_COUNT;i++)
 	{
 		u.at(i).state = rand() %2;
@@ -40,10 +43,12 @@ void initialization(std::vector<Unit> u,double *W,double *L,double *J)
 
 void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *W,double *L, double *J)
 {
+	std::cout << "[SYSTEM]: starting clamped phase...." << std::endl;
 
 }
 void Freerunning_phase(std::vector<Unit> u,double *W,double *L, double *J)
 {
+	std::cout << "[SYSTEM]: starting Free-Running phase...." << std::endl;
 
 }
 

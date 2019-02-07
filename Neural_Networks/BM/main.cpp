@@ -1,38 +1,28 @@
-////////////////////////////////////////////////////////////////////////////
-//
-//Author: Caio J. B. V. Guimaraes
-//E-mail: caio.b.vilar@gmail.com
-//License: GLPv3.0
-//
-//
-////////////////////////////////////////////////////////////////////////////
-
-
 #include "base.hpp"
+
+// If I have 2 visible units, say A and B, A(0,0) and B(0,1)
+int V[1][3] = {1,1,0}; //which means first two units are visible and the last isnt.
+
+double B[rows1][cols1] = {1,1,-2};
+double S[rows1][cols1] = {0,1,0};
+double W[rows2][cols2] = {{0,-1,2},{-1,0,2},{2,2,0}};
+double T[rows1][cols2] = {0,0,0};
 
 int main(int argc, char *argv[])
 {
-	if(argc != 3)
-	{
-		std::cout << "USAGE: ./main VISIBLE_COUNT HIDDEN_COUNT" << std::endl;
-		return 0;
-	}
-	int visible_count= atoi(argv[1]),hidden_count = atoi(argv[2]);
-	double W[visible_count][hidden_count]; 		//
-	double L[visible_count][visible_count]; 	// Diagonal weights set to zero
-	double J[hidden_count][hidden_count];			// Diagonal weights set to zero
-
-	std::vector<Unit> units;
-
-	units = set_visible_hidden(units,visible_count,hidden_count);
-	units = initialization(units,W[0],L[0],J[0],visible_count,hidden_count);
-
-	std::cout << "There are: " << units.size() << " units." << std::endl; 
-
-	show_states(units);
-	show_weights(W[0],L[0],J[0],visible_count,hidden_count);
-
+	std::cout << "[Initial States]" << std::endl;
+	show_values(S[0],rows1,cols1);
+	std::cout << "[Initial Weights]" << std::endl;
+	show_values(W[0],rows2,cols2);
+	std::cout << "[Finding local field]" << std::endl;
+	multiply_matrices(S[0],W[0],T[0],rows1,cols1,cols2);
+	show_values(T[0],rows1,cols2);
+	std::cout << "[Adding Bias]" << std::endl;
+	add_bias(B[0],T[0],rows1,cols1);
+	show_values(S[0],rows1,cols1);
+	std::cout << "[Evaluating States]" << std::endl;
+	evaluate_state(S[0],T[0],rows1,cols1,B[0],V[0]);
+	show_values(S[0],rows1,cols1);
 	return 0;
 }
-
 

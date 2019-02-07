@@ -1,30 +1,26 @@
 #ifndef _BASE_HPP_
 #define _BASE_HPP_
-///////////////////////INCLUDES///////////////
 
 #include <iostream>
 #include <iomanip>
-#include <string>
-#include <vector>
-#include <ctime>
+#include <cmath>
+
+#define rows1 1
+#define rows2 3
+#define cols1 3
+#define cols2 3
+
+//TODO: implement Gross's state equation and try to validate my implementation with his results.
+void assign_random(double *m, int rowsm, int colsm,bool binary);
+void show_values(double *m,int rowsm,int colsm);
+void sum_matrices(double *m1,double *m2, int rowsm12,int colsm12);
+void multiply_matrices(double *m1, double *m2, double *mout, int rowsm1, int colsm1, int rowsm2);
+double DRand(double min, double max);
+void evaluate_state(double *s,double *t,int rowss,int colss,double *b,int *v);
+void add_bias(double *b, double *t, int rowsbt, int colsbt);
 
 
-///////////////////////BASE DEFINITIONS///////
+////////PAPER AND GATE/////////////////////
 
-
-struct Unit			// Units definition structure
-{
-	bool visible;   // Defines if they're visible units or not.
-	int state;	// Units state
-};
-
-
-std::vector<Unit> set_visible_hidden(std::vector<Unit> u, int visible_count, int hidden_count);
-std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j,int visible_count, int hidden_count);
-void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *w,double *l, double *j);
-void Freerunning_phase(std::vector<Unit> u,double *w,double *l, double *j);
-double DRand(double min,double max);
-void show_states(std::vector<Unit> u);
-void show_weights(double *w, double *l, double *k,int visible_count,int hidden_count);
 
 #endif //_BASE_HPP_

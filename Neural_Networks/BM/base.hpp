@@ -11,11 +11,6 @@
 
 ///////////////////////BASE DEFINITIONS///////
 
-#define UNIT_COUNT	4	
-#define VISIBLE_COUNT 2
-#define HIDDEN_COUNT 2
-
-
 
 struct Unit			// Units definition structure
 {
@@ -24,12 +19,12 @@ struct Unit			// Units definition structure
 };
 
 
-std::vector<Unit> set_visible_hidden(std::vector<Unit> u);
-std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j);
+std::vector<Unit> set_visible_hidden(std::vector<Unit> u, int visible_count, int hidden_count);
+std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j,int visible_count, int hidden_count);
 void Clamped_phase(std::vector<Unit> u,std::vector<uint8_t> Training_Pattern,double *w,double *l, double *j);
 void Freerunning_phase(std::vector<Unit> u,double *w,double *l, double *j);
 double DRand(double min,double max);
 void show_states(std::vector<Unit> u);
-void show_weights(double *w, double *l, double *j);
+void show_weights(double *w, double *l, double *k,int visible_count,int hidden_count);
 
 #endif //_BASE_HPP_

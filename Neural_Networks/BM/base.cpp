@@ -1,21 +1,22 @@
 #include "base.hpp"
 
+//////////////////////////////////////FUNCTION DEFINITIONS/////////////////////////////////
 double DRand(double min,double max)
 {
 	double ret = (double)rand()/RAND_MAX;
 	return min+(ret*(max-min));
 }
 
-std::vector<Unit> set_visible_hidden(std::vector<Unit> u)
+std::vector<Unit> set_visible_hidden(std::vector<Unit> u, int visible_count, int hidden_count)
 {
-	std::cout << "[SYSTEM]: setting [" << VISIBLE_COUNT << "] unit(s) as visible..." << std::endl;
-	for(static int i=0;i<VISIBLE_COUNT;i++)
+	std::cout << "[SYSTEM]: setting [" << visible_count << "] unit(s) as visible..." << std::endl;
+	for(int i=0;i<visible_count;i++)
 	{
 		Unit visible;
 		visible.visible = true;
 		u.push_back(visible);
 	}
-	for(static int i=0;i<HIDDEN_COUNT;i++)
+	for(int i=0;i<hidden_count;i++)
 	{
 		Unit hidden;
 		hidden.visible = false;
@@ -24,7 +25,7 @@ std::vector<Unit> set_visible_hidden(std::vector<Unit> u)
 	return u;
 }
 
-std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j)
+std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double *j,int visible_count, int hidden_count)
 {
 	std::cout << "[SYSTEM]: initialization of states and weights." << std::endl;
 
@@ -34,22 +35,49 @@ std::vector<Unit> initialization(std::vector<Unit> u,double *w,double *l,double 
 	{
 		(*itr_u).state = rand()%2;
 	}
-	std::cout << "[SYSTEM]: setting [" << VISIBLE_COUNT*VISIBLE_COUNT << "] visible-visible weights randomly..." << std::endl;
-	for(static int i = 0;i < VISIBLE_COUNT*VISIBLE_COUNT;i++) //initializing visible-visible interaction weights
+
+	std::cout << "[SYSTEM]: setting [" << visible_count*hidden_count << "] visible-hidden weights randomly..." << std::endl;
+
+	for(int i = 0;i < visible_count;i++) //initializing visible-hidden interaction weights
 	{
-		*(w+i) = DRand(-1,1);
+		for(int k = 0;k < hidden_count;k++)
+		{
+			*(w+(i*hidden_count+k)) = DRand(-1,1);
+		}
 	}
-	std::cout << "[SYSTEM]: setting [" << VISIBLE_COUNT*HIDDEN_COUNT << "] visible-hidden weights randomly..." << std::endl;
-	for(static int i = 0;i < VISIBLE_COUNT*HIDDEN_COUNT;i++) //initializing visible-hidden interaction weights
+
+	std::cout << "[SYSTEM]: setting [" << visible_count*visible_count << "] visible-visible weights randomly..." << std::endl;
+
+	for(int i = 0;i < visible_count;i++) //initializing visible-visible interaction weights
 	{
-		//put condition to set diagonal weights to zero
-		*(l+i) = DRand(-1,1);
+		for(int k = 0;k < visible_count;k++)
+		{
+			if(i == k)
+			{
+				*(l+(i*visible_count+k)) = 0.0;
+			}
+			else
+			{
+				*(l+(i*visible_count+k)) = DRand(-1,1);
+			}
+		}
 	}
-	std::cout << "[SYSTEM]: setting [" << HIDDEN_COUNT*HIDDEN_COUNT << "] hidden-hidden weights randomly..." << std::endl;
-	for(static int i = 0;i < HIDDEN_COUNT*HIDDEN_COUNT;i++) //initializing hidden-hidden interaction weights
+
+	std::cout << "[SYSTEM]: setting [" << hidden_count*hidden_count << "] hidden-hidden weights randomly..." << std::endl;
+
+	for(int i = 0;i < hidden_count;i++) //initializing hidden-hidden interaction weights
 	{
-		//put condition to set diagonal weights to zero
-		*(j+i) = DRand(-1,1);
+		for(int k = 0;k < hidden_count;k++)
+		{
+			if(i == k)
+			{
+				*(j+(i*hidden_count+k)) = 0.0;
+			}
+			else
+			{
+				*(j+(i*hidden_count+k)) = DRand(-1,1);
+			}
+		}
 	}
 	return u;
 }
@@ -82,31 +110,34 @@ void show_states(std::vector<Unit> u)
 	}
 }
 
-void show_weights(double *w, double *l, double *k)
+void show_weights(double *w, double *l, double *k,int visible_count,int hidden_count)
 {
-	for(static int i=0;i<VISIBLE_COUNT*HIDDEN_COUNT;i++)
+	std::cout << "Visible-Hidden Weights: " << std::endl;
+	for(int i=0;i<visible_count;i++)
 	{
-		if((i%HIDDEN_COUNT) == 0)
+		for(int j=0;j<hidden_count;j++)
 		{
-			std::cout << std::endl;
+			std::cout << std::setprecision(3) << *(w + (i*hidden_count+j)) << "\t";
 		}
-		std::cout << *(w+i) << " ";
+		std::cout << std::endl;
 	}
-	for(static int i=0;i<VISIBLE_COUNT*VISIBLE_COUNT;i++)
+	std::cout << "\n\nVisible-Visible Weights: " << std::endl;
+	for(int i=0;i<visible_count;i++)
 	{
-		if((i%VISIBLE_COUNT) == 0)
+		for(int j=0;j<visible_count;j++)
 		{
-			std::cout << std::endl;
+			std::cout << std::setprecision(3) << *(l + (i*visible_count+j)) << "\t";
 		}
-		std::cout << *(l+i) << " ";
+		std::cout << std::endl;
 	}
-	for(static int i=0;i<HIDDEN_COUNT*HIDDEN_COUNT;i++)
+	std::cout << "\n\nHidden-Hidden Weights: " << std::endl;
+	for(int i=0;i<hidden_count;i++)
 	{
-		if((i%HIDDEN_COUNT) == 0)
+		for(int j=0;j<hidden_count;j++)
 		{
-			std::cout << std::endl;
+			std::cout << std::setprecision(3) << *(k + (i*hidden_count+j)) << "\t";
 		}
-		std::cout << *(k+i) << " ";
+		std::cout << std::endl;
 	}
 	std::cout << "\n\n";
 }

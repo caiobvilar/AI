@@ -4,13 +4,14 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <algorithm>
 
 #define rows1 1
 #define rows2 3
 #define cols1 3
 #define cols2 3
 
-//TODO: implement Gross's state equation and try to validate my implementation with his results.
+//TODO: implement clamped training phase.
 void assign_random(double *m, int rowsm, int colsm,bool binary);
 void show_values(double *m,int rowsm,int colsm);
 void sum_matrices(double *m1,double *m2, int rowsm12,int colsm12);
@@ -18,9 +19,9 @@ void multiply_matrices(double *m1, double *m2, double *mout, int rowsm1, int col
 double DRand(double min, double max);
 void evaluate_state(double *s,double *t,int rowss,int colss,double *b,int *v);
 void add_bias(double *b, double *t, int rowsbt, int colsbt);
-
-
-////////PAPER AND GATE/////////////////////
+void clamped_training();
+void array_copy(double *a,double *b, int rowsab, int colsab);
+///////PAPER AND GATE/////////////////////
 
 
 #endif //_BASE_HPP_

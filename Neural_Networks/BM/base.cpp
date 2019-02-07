@@ -101,3 +101,13 @@ void evaluate_state(double *s,double *t,int rowss,int colss,double *b, int *v)
 		}
 	}
 }
+void array_copy(double *a,double *b, int rowsab, int colsab)
+{
+	for(int i=0;i < rowsab;i++)
+	{
+		for(int j=0;j<colsab;j++)
+		{
+			*(b + (i*colsab+j)) =  *(a + (i*colsab+j));
+		}
+	}
+}

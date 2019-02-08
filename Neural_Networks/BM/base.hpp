@@ -17,9 +17,8 @@ void show_values(double *m,int rowsm,int colsm);
 void sum_matrices(double *m1,double *m2, int rowsm12,int colsm12);
 void multiply_matrices(double *m1, double *m2, double *mout, int rowsm1, int colsm1, int rowsm2);
 double DRand(double min, double max);
-void evaluate_state(double *s,double *t,int rowss,int colss,double *b,int *v);
+void clamped_phase(double *s,double *t,int rowss,int colss,double *b, int *v);
 void add_bias(double *b, double *t, int rowsbt, int colsbt);
-void clamped_training();
 void array_copy(double *a,double *b, int rowsab, int colsab);
 ///////PAPER AND GATE/////////////////////
 

@@ -92,7 +92,7 @@ double DRand(double min, double max)
 //			input.
 //		-	Sample the visible vector once each time.
 //	     		
-void evaluate_state(double *s,double *t,int rowss,int colss,double *b, int *v)
+void clamped_phase(double *s,double *t,int rowss,int colss,double *b, int *v)
 {
 	//Add a check if any states in the V vector is changed, if the amount
 	//of changes is zero, the network reached thermal equilibrium.

@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 	if(argc != 2)
 	{
 		std::cout << "USAGE: ./main USE_CASE" << std::endl;
+		return 0;
 	}
 	switch(atoi(argv[1]))
 	{
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])
 	add_bias(B[0],T[0],rows1,cols1);
 	show_values(S[0],rows1,cols1);
 	std::cout << "[Evaluating States]" << std::endl;
-	evaluate_state(S[0],T[0],rows1,cols1,B[0],V[0]);
+	clamped_phase(S[0],T[0],rows1,cols1,B[0],V[0]);
 	show_values(S[0],rows1,cols1);
 	return 0;
 }

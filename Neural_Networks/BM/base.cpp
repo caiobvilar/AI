@@ -79,8 +79,19 @@ double DRand(double min, double max)
 	return (min+(ret*(max-min)));
 }
 
-
-
+///////////////////////////BOLTZMANN LEARNING/////////////////////////////////////////////////////
+// The BM Learning algorithm is an unsupervised learning algorithm
+// The algorithm is trying to build a model of the set of input vectors.
+//	-	We want to maximize the productof the probabilities that the BM
+//		assigns to the binary vectors in the training set.
+//	-	It is also equivalent to maximizing the probability
+//		that we would obtain exactly the N training cases
+//		if we did the following:
+//		-	Let the network settle to its stationary
+//			distribution N different times with no external
+//			input.
+//		-	Sample the visible vector once each time.
+//	     		
 void evaluate_state(double *s,double *t,int rowss,int colss,double *b, int *v)
 {
 	for(int i=0;i < rowss;i++)
@@ -101,6 +112,7 @@ void evaluate_state(double *s,double *t,int rowss,int colss,double *b, int *v)
 		}
 	}
 }
+////////////////////////////////////////////////////////////////////////////////
 void array_copy(double *a,double *b, int rowsab, int colsab)
 {
 	for(int i=0;i < rowsab;i++)

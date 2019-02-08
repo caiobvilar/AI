@@ -13,6 +13,7 @@ double T[rows1][cols2] = {0,0,0};
 double S[rows1][cols1];
 
 
+
 int main(int argc, char *argv[])
 {
 	if(argc != 2)

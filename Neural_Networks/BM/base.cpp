@@ -94,6 +94,8 @@ double DRand(double min, double max)
 //	     		
 void evaluate_state(double *s,double *t,int rowss,int colss,double *b, int *v)
 {
+	//Add a check if any states in the V vector is changed, if the amount
+	//of changes is zero, the network reached thermal equilibrium.
 	for(int i=0;i < rowss;i++)
 	{
 		for(int j=0;j< colss;j++)

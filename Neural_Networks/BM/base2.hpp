@@ -42,6 +42,7 @@ class Network
 		void FreeRunningPhase();
 		void InsertUnit(int state,int id);
 		void RandomInit(int unit_count);
+		void ShowUnits();
 };
 
 

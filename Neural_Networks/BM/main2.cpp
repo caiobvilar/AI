@@ -2,12 +2,14 @@
 
 
 
-
+#define UNIT_COUNT 3
 
 
 
 int main(int argc, char *argv[])
 {
-
+	Network *net = new Network();
+	net->RandomInit(UNIT_COUNT);
+	net->ShowUnits();
 	return 0;
 }

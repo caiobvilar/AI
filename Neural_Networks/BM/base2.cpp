@@ -73,3 +73,13 @@ void Network::RandomInit(int unit_count)
 		this->InsertUnit(rand()%2,i);
 	}
 }
+
+void Network::ShowUnits()
+{
+	
+	std::vector<Unit>::iterator itr_units;
+	for(itr_units = this->units.begin();itr_units != this->units.end();itr_units++)
+	{
+		std::cout << "Unit ID: " <<(*itr_units).getId() << " | Unit State: " << (*itr_units).getState() << std::endl;
+	}
+}

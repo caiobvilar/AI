@@ -1,7 +1,9 @@
 #include "base.hpp"
 //TODO: understand how sampling of a Energy-Based Model works, like Markov-Chain Monte-Carlo methods
 //      and how to implement it given the current implementation model I'm using right now.
+/////////////////////////////////////////////////////////////////////////////////////////////////////      
 // If I have 2 visible units, say A and B, A(0,0) and B(0,1)
+
 int V[1][3] = {1,1,0}; //which means first two units are visible and the last isnt.
 
 double B[rows1][cols1] = {1,1,-2};										//Bias vector

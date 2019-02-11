@@ -1,5 +1,6 @@
 #include "base.hpp"
-
+//TODO: understand how sampling of a Energy-Based Model works, like Markov-Chain Monte-Carlo methods
+//      and how to implement it given the current implementation model I'm using right now.
 // If I have 2 visible units, say A and B, A(0,0) and B(0,1)
 int V[1][3] = {1,1,0}; //which means first two units are visible and the last isnt.
 
@@ -8,7 +9,7 @@ double S1[rows1][cols1] = {0,0,1};										//Training set 1
 double S2[rows1][cols1] = {0,1,1};										//Training set 2
 double S3[rows1][cols1] = {1,0,1};										//Training set 3
 double S4[rows1][cols1] = {1,1,0};										//Training set 4
-double S_AND[SAMPLES][NODES]
+//double S_AND[SAMPLES][NODES] = {};
 double W[rows2][cols2] = {{0,-1,2},{-1,0,2},{2,2,0}};
 double T[rows1][cols2] = {0,0,0};
 double S[rows1][cols1];

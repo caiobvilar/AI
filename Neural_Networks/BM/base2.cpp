@@ -46,26 +46,66 @@ Unit::~Unit()
 {
 	this->neighbours.clear();
 }
+/////////////////////////////////////////////////////////////////////////
+//Network Constructor
+//Arguments:
+//@
+//Return:
+/////////////////////////////////////////////////////////////////////////
 Network::Network()
 {
 }
 
+/////////////////////////////////////////////////////////////////////////
+//Network Destructor
+//Arguments:
+//@
+//Return:
+/////////////////////////////////////////////////////////////////////////
 Network::~Network()
 {
 }
 
+/////////////////////////////////////////////////////////////////////////
+//Network ClampedPhase()
+//Arguments:
+//@std::vector<int> visible
+//Return:
+//@void
+/////////////////////////////////////////////////////////////////////////
 void Network::ClampedPhase(std::vector<int> visible)
 {
 }
+/////////////////////////////////////////////////////////////////////////
+//Network ClampedPhase()
+//Arguments:
+//@std::vector<int> visible
+//Return:
+//@void
+/////////////////////////////////////////////////////////////////////////
 void Network::FreeRunningPhase()
 {
 }
+/////////////////////////////////////////////////////////////////////////
+//Network InsertUnit()
+//Arguments:
+//@state
+//@id
+//Return:
+//@void
+/////////////////////////////////////////////////////////////////////////
 void Network::InsertUnit(int state,int id)
 {
 	Unit u_aux(state,id);
 	this->units.push_back(u_aux);
 }
-
+/////////////////////////////////////////////////////////////////////////
+//Network ClampedPhase()
+//Arguments:
+//@std::vector<int> visible
+//Return:
+//@void
+/////////////////////////////////////////////////////////////////////////
 void Network::RandomInit(int unit_count)
 {
 	for(int i=0;i < unit_count;i++)
@@ -82,4 +122,27 @@ void Network::ShowUnits()
 	{
 		std::cout << "Unit ID: " <<(*itr_units).getId() << " | Unit State: " << (*itr_units).getState() << std::endl;
 	}
+}
+double Network::DRand(double min, double max)
+{
+	double ret = (double)rand()/RAND_MAX;
+	return (min+(ret*(max-min)));
+}
+void Network::setNeighbours()
+{
+	std::vector<Unit>::iterator itr_units;
+	std::vector<Unit>::iterator itr_units_reverse;
+	for(itr_units = this->units.begin(),
+			itr_units_reverse = this->units.end();
+			itr_units != this->units.end(),
+			itr_units_reverse != this->units.begin();
+			itr_units++,
+			itr_units--)
+	{
+		if((*itr_units).getId() != (*itr_units_reverse).getId())
+		{
+			(*itr_units).setNeighbour(*itr_units_reverse,DRand(-1,1));
+		}
+	}
+
 }

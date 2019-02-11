@@ -39,10 +39,12 @@ class Network
 		Network();
 		~Network();
 		void ClampedPhase(std::vector<int> visible);
+		void setNeighbours();
 		void FreeRunningPhase();
 		void InsertUnit(int state,int id);
 		void RandomInit(int unit_count);
 		void ShowUnits();
+		double DRand(double min, double max);
 };
 
 

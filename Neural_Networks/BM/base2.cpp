@@ -1,10 +1,11 @@
 #include "base2.hpp"
-
+//TODO: implement Network::setNeighbours()
 
 int Unit::getId()
 {
 	return this->id;
 }
+
 void Unit::setId(int ids)
 {
 	this->id = ids;
@@ -14,26 +15,33 @@ int Unit::getState()
 {
 	return this->state;
 }
+
 void Unit::setState(int s)
 {
 	this->state = s;
 }
+
 double Unit::energyGap()
 {
 	double ret = 0.0;
 	return ret;
 }
 
-void Unit::setNeighbour(Unit *neighbour,double weight)
+void Unit::setNeighbour(int n_id,double weight)
 {
-	std::map<Unit *, double> aux_map;
-	aux_map.insert(std::pair<Unit *,double>(neighbour,weight));
+	std::map<int, double> aux_map;
+	aux_map.insert(std::pair<int,double>(n_id,weight));
 	this->neighbours.push_back(aux_map);
 }
 
 void Unit::setVisibility(bool v)
 {
 	this->visible = v;
+}
+
+void Unit::showNeighbours()
+{
+		std::cout << "Neighbour Count: " << this->neighbours.size() << std::endl;
 }
 
 
@@ -121,6 +129,7 @@ void Network::ShowUnits()
 	for(itr_units = this->units.begin();itr_units != this->units.end();itr_units++)
 	{
 		std::cout << "Unit ID: " <<(*itr_units).getId() << " | Unit State: " << (*itr_units).getState() << std::endl;
+		(*itr_units).showNeighbours();
 	}
 }
 double Network::DRand(double min, double max)
@@ -130,19 +139,7 @@ double Network::DRand(double min, double max)
 }
 void Network::setNeighbours()
 {
-	std::vector<Unit>::iterator itr_units;
-	std::vector<Unit>::iterator itr_units_reverse;
-	for(itr_units = this->units.begin(),
-			itr_units_reverse = this->units.end();
-			itr_units != this->units.end(),
-			itr_units_reverse != this->units.begin();
-			itr_units++,
-			itr_units--)
-	{
-		if((*itr_units).getId() != (*itr_units_reverse).getId())
-		{
-			(*itr_units).setNeighbour(*itr_units_reverse,DRand(-1,1));
-		}
-	}
-
+	//
+	
 }
+

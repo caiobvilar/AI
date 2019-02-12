@@ -16,7 +16,7 @@ class Unit
 		int id;
 		int state;
 		bool visible;
-		std::vector<std::map<Unit *,double>> neighbours;
+		std::vector<std::map<int,double>> neighbours;
 
 	public:
 
@@ -25,8 +25,9 @@ class Unit
 		int getState();
 		void setState(int s);
 		double energyGap();
-		void setNeighbour(Unit *neighbour,double weight);
+		void setNeighbour(int n_id,double weight);
 		void setVisibility(bool v);
+		void showNeighbours();
 		Unit(int state,int id);
 		~Unit();
 };

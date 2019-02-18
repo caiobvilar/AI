@@ -34,11 +34,12 @@ void assign_random(double *m, int rowsm, int colsm,bool binary)
 
 void show_values(double *m,int rowsm,int colsm)
 {
+	std::cout << "##################" << std::endl;
 	for(int i=0;i < rowsm;i++)
 	{
 		for(int j=0;j<colsm;j++)
 		{
-			std::cout << std::setprecision(3) <<*(m + (i*colsm+j)) << "\t";
+			std::cout << std::setprecision(5) << std::fixed << *(m + (i*colsm+j)) << "\t";
 		}
 		std::cout << std::endl;
 	}
@@ -57,6 +58,16 @@ void add_bias(double *b, double *t, int rowsbt, int colsbt)
 
 }
 
+void subtract_matrices(double *m1, double *m2,double *mout, int rowsbt, int colsbt)
+{
+	for(int i=0;i < rowsbt;i++)
+	{
+		for(int j=0;j<colsbt;j++)
+		{
+			*(mout + (i*colsbt+j)) =  *(m1 + (i*colsbt+j)) - *(m2 + (i*colsbt+j));
+		}
+	}
+}
 void multiply_matrices(double *m1, double *m2, double *mout, int rowsm1, int colsm1, int colsm2)
 {
 	for(int i=0;i<rowsm1;i++)
@@ -131,11 +142,25 @@ void transpose(double *mat_in,double *mat_out,int rows,int cols)
 		}
 	}
 }
-double global_energy(double *s,double *st, double *b,double *bt,int *v,int rowss,int colss,double *w)
+void global_energy(double *s,double *st,double *bt,int *v,int rowss,int colss,double *w,double *e)
 {
-
-	double ret= 0.0;
-	return ret;
+	/*
+		 double C[rowss][rowss];
+		 double D[rowss][rowss];
+		 double F[rowss][rowss];
+		 double E_aux[rowss][rowss];
+	//E_theta(x) = -Bt * X - Xt * W * X
+	//multiply Bt by X and store it in C
+	//multiply Xt by X store in a rowss x rowss matrix D
+	//multiply D by W and store it in F
+	//subtract C from F and store it in E.
+	//Copy contents from
+	multiply_matrices(bt,s,C[0],rowss,1,colss);
+	multiply_matrices(s,st,D[0],rowss,colss,colss);
+	multiply_matrices(D[0],w,F[0],rowss,colss,colss);
+	subtract_matrices();
+	array_copy_diag(E_aux[0],e,rowss,rowss);
+	*/
 }
 ////////////////////////////////////////////////////////////////////////////////
 void array_copy(double *a,double *b, int rowsab, int colsab)
@@ -145,6 +170,39 @@ void array_copy(double *a,double *b, int rowsab, int colsab)
 		for(int j=0;j<colsab;j++)
 		{
 			*(b + (i*colsab+j)) =  *(a + (i*colsab+j));
+		}
+	}
+}
+void array_copy_diag(double *a,double *b, int rowsab, int colsab)
+{
+	for(int i=0;i < rowsab;i++)
+	{
+		for(int j=0;j<colsab;j++)
+		{
+			if(i == j)
+			{
+				*(b + (i*colsab+j)) =  *(a + (i*colsab+j));
+			}
+		}
+	}
+}
+
+void calc_prob(double *e,double *ps,int rowse,int colse)
+{
+	double energy = 0.0;
+	for(int i=0;i < rowse;i++)
+	{
+		for(int j=0;j<colse;j++)
+		{
+			energy +=  *(e + (i*colse+j));
+		}
+	}
+	energy = exp(energy);
+	for(int i=0;i < rowse;i++)
+	{
+		for(int j=0;j<colse;j++)
+		{
+			*(ps + (i*colse+j)) = (*(e + (i*colse+j))/energy);
 		}
 	}
 }

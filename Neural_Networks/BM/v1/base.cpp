@@ -32,6 +32,17 @@ void assign_random(double *m, int rowsm, int colsm,bool binary)
 
 }
 
+void negativate(double *m,int rowsm,int colsm)
+{
+	for(int i=0;i < rowsm;i++)
+	{
+		for(int j=0;j<colsm;j++)
+		{
+			*(m + (i*colsm+j)) = (-1)* *(m + (i*colsm+j));
+		}
+	}
+
+}
 void show_values(double *m,int rowsm,int colsm)
 {
 	std::cout << "##################" << std::endl;

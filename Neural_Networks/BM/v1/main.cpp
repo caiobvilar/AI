@@ -110,6 +110,7 @@ int main(int argc, char *argv[])
 			transpose(S[0],St[0],rows1,cols1);
 			show_values(St[0],cols1,rows1);
 			transpose(B[0],Bt[0],rows1,cols1);
+			negativate(Bt[0],cols1,rows1);
 			multiply_matrices(Bt[0],S[0],C[0],rows1,1,cols1);
 			multiply_matrices(S[0],St[0],D[0],rows1,cols1,cols1);
 			multiply_matrices(D[0],W[0],F[0],rows1,cols1,cols1);

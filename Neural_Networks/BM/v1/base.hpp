@@ -24,6 +24,7 @@ void subtract_matrices(double *m1, double *m2,double *mout, int rowsbt, int cols
 void array_copy(double *a,double *b, int rowsab, int colsab);
 void array_copy_diag(double *a,double *b, int rowsab, int colsab);
 void calc_prob(double *e,double *ps,int rowse,int colse);
+void negativate(double *m,int rowsm,int colsm);
 ///////PAPER AND GATE/////////////////////
 
 

@@ -17,11 +17,11 @@ class Network
 	public:
 		double DRand(double min, double max);
 		int BRand();
-		learn_pattern();
-		anneal();
-		recall_pattern();
-		adjust_weights();
-		sweep_probe(); //also called propagate.
+		Learn_pattern();
+		Anneal();
+		Recall_pattern();
+		Adjust_weights();
+		Sweep_probe(); //also called propagate.
 };
 
 
